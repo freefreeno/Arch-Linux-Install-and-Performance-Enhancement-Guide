@@ -1,0 +1,85 @@
+                        *** Theming insructions for all my themes ***
+--- This is for new users so we will go back to default first and do not think that my themes are this many steps because they are actually like 4 or 5 steps once you know what is going on.
+--- I will do this in sections.
+
+                                *** Going back to default ***
+                                
+--- Make sure your settings are set to sidebar view so you see things the way I see them.
+--- If you are in icon view then select configure at the top of settings menu and select sidebar view.
+
+                                   *** Workspace Theme ***
+--- Select Workspace Theme
+--- Select Look and Feel
+--- Select Breeze and hit apply
+--- Select Plasma Theme
+--- Select Breeze and hit apply ( This should already be done but if not then do it now )
+
+                                      *** Colors ***
+
+--- Select Colors
+--- Select Breeze and hit apply ( This should already be done but if not then do it now )
+
+                                      *** Icons ***
+                                      
+--- Select Breeze and hit apply  ( This should already be done but if not then do it now )
+
+                                 *** Application Style ***
+                                 
+--- Select Application Style
+--- Select Widget Style and over on the right hand side you will see Widget style again.
+--- Make sure widget Style is set to Breeze and hit apply
+--- Select Window Decorations
+--- Select Breeze and configure Breeze 
+--- Select Defaults and hit apply
+--- Hit apply again
+--- Select GNOME/GTK Application Style
+--- Select A GTK2 Theme ( Breeze )
+--- Select A GTK3 Theme ( Breeze )
+--- Hit apply
+
+Now we can apply my themes. The directions above have nothing to do with applying my themes. Only to get you back to default so you can follow my little guide better.
+
+--- Go here and download the Night Terror Color-Scheme into your Downloads folder: https://www.opendesktop.org/p/1299094/
+
+--- Extract the folder and then copy the color-scheme into ~/.local/share/color-schemes
+--- If you want you can do this real easy by opening your terminal in the downloads folder and and type --- cp -r NightTerror.color  ~/.local/share/color-schemes
+
+--- Go here and download the Plasma theme into your Downloads folder: https://www.opendesktop.org/p/1299095/
+--- Extract the folder intot the Downloads folder
+--- Copy the Night-Terror folder into the ~/.local/share/plasma/desktoptheme/
+or open the terminal in the Downloads folder and type cp -r Night-Terror ~/.local/share/plasma/desktoptheme
+
+--- Go here and download the Night-Terror GTK theme into your Downloads folder: https://www.opendesktop.org/p/1300583/
+--- Extract the folder into the Downloads folder
+--- Open the terminal in the Downloads folder and type sudo cp -r Night-Terror-gtk /usr/share/themes
+
+--- You can also use ~/.local/share/themes ( if you don't have it create it ) I use root
+
+                                         *** Icons ***
+                                         
+--- Go here and download the icons or preferably just git clone them into the downloads folder:
+https://github.com/cbrnix/Newaita
+or just open terminal in Downloads folder and type: git clone https://github.com/cbrnix/Newaita
+
+--- Move into the Newaita folder and either just copy the two folders and go paste them into ~/.local/share/icons or do it the easy way and open the terminal and type:
+ cp -r Newaita Newaita-dark ~/.local/share/icons
+
+ --- Make folders Green
+
+ --- Either go to the Newaita-dark icons folder in ~/.local/share/icons/Newaita-dark or do it the easy way and open a terminal and type cd ~/.local/share/icons/Newaita-dark and type ./FV.sh and a menu will open in the terminal and ask you what color you want.
+ You want the Manjaro color
+ That is for icons. It is simple. Open a terminal in the folder where you installed the icons and type ./FV.sh
+ select Manjaro
+ 
+ --- Now we apply the themes. When you learn what is going on this is how simple it it is.
+ 
+ --- Got to Workspace Theme and then to Plasma Theme and select Night Terror and hit apply
+
+ --- Go to colors and select the NightTerror colors and hit apply
+
+--- Go to Application Style and GNOME/GTK Application Style
+--- Select Night-Terror-gtk for your GTK2 and GTK3 themes and hit apply.
+--- In the same menu down at the bottom select Newaita-dark for your icon theme and hit apply
+--- Go to icons in main settings menu and select your Newaita dark icons which if you followed directions will be green and hit apply.
+
+So in reality applying my themes is simple but the only reason i went thru this is so you can have them applied correctly. The long directions for new users. It is as simple as learning how to set your themes and set them and this teaches you just that. For advanced users this is way to long but I would like you have the real beauty of the themes and to have that you must not use different settings or icons . They simply will not match. Follow these steps and all will work like it is supposed to I promise but like I said leave one thing off and the entire theme will be off and you most likely will not be happy.
