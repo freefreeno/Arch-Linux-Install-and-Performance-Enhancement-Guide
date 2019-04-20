@@ -1,29 +1,30 @@
-                        *** Theming insructions for all my themes ***
+   *** First thing I need to say is I don't use all that fancy Kavantum crap or all those transparent windows because I like performance    and I like the Breeze window decorations. In my eyes Breeze Dark is not a bad theme but it could have better colors so most of my themes are based on breeze with my own Plasma themes and color schemes. My themes are meant to be used with Breeze window decorations. Now lets begin.
+                                   *** Theming insructions for all my themes ***
 --- This is for new users so we will go back to default first and do not think that my themes are this many steps because they are actually like 4 or 5 steps once you know what is going on.
 --- I will do this in sections.
 
-                                *** Going back to default ***
+                                           *** Going back to default ***
                                 
 --- Make sure your settings are set to sidebar view so you see things the way I see them.
 --- If you are in icon view then select configure at the top of settings menu and select sidebar view.
 
-                                   *** Workspace Theme ***
+                                           *** Workspace Theme ***
 --- Select Workspace Theme
 --- Select Look and Feel
 --- Select Breeze and hit apply
 --- Select Plasma Theme
 --- Select Breeze and hit apply ( This should already be done but if not then do it now )
 
-                                      *** Colors ***
+                                           *** Colors ***
 
 --- Select Colors
 --- Select Breeze and hit apply ( This should already be done but if not then do it now )
 
-                                      *** Icons ***
+                                           *** Icons ***
                                       
 --- Select Breeze and hit apply  ( This should already be done but if not then do it now )
 
-                                 *** Application Style ***
+                                        *** Application Style ***
                                  
 --- Select Application Style
 --- Select Widget Style and over on the right hand side you will see Widget style again.
@@ -84,7 +85,7 @@ or just open terminal in Downloads folder and type: git clone https://github.com
 
 So in reality applying my themes is simple but the only reason i went thru this is so you can have them applied correctly. The long directions for new users. It is as simple as learning how to set your themes and set them and this teaches you just that. For advanced users this is way to long but I would like you have the real beauty of the themes and to have that you must not use different settings or icons . They simply will not match. Follow these steps and all will work like it is supposed to I promise but like I said leave one thing off and the entire theme will be off and you most likely will not be happy.
 
-If you like the Night Terror theme then you will probably like the Materia-Manjaro theme also.
+If you like the Night Terror theme but say it is a little too dark then you will probably like the Materia-Manjaro theme also and the same green icons will match that theme also.
 https://www.opendesktop.org/p/1297508/
 
 You can have access to all my themes from this github page:
