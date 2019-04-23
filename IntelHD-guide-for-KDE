@@ -1,4 +1,6 @@
- I have Intel HD 620 that runs freeking awesome with KDE so if you would like I can tell you what I do to make it smoother than it was on Gnome or Xfce for me. It shouldn't require you doing anything like what you are doing. It is easy to have max performance and NO problems in Arch KDE.
+ I have Intel HD 620 that runs freeking awesome with KDE so if you would like I can tell you what I do to make it smoother than it was on 
+ Gnome or Xfce for me. It shouldn't require you doing anything like what you are doing. It is easy to have max performance and NO problems
+ in Arch KDE.
 
 Go to compositor settings
 
@@ -44,6 +46,9 @@ sudo cat /sys/kernel/debug/dri/0/i915_guc_load_status
 
 
 
-You can follow any other thing you want but this is the best. I have used the Intel HD 620 since it came out on every Linux Desktop environment and this is all you need to do.
+You can follow any other thing you want but this is the best. I have used the Intel HD 620 since it came out on every Linux Desktop
+environment and this is all you need to do.
 
-In Arch we have a Chromium patch to enable Hardware Acceleration and with it and the these settings the you will stream video in Vp9 and H.264 and use less than half the processor than you were before with much better browsing and performance. Your Hardware acceleration will not work correctly without huc and guc enabled. It is one command so yea enable it.
+In Arch we have a Chromium patch to enable Hardware Acceleration and with it and the these settings the you will stream video in Vp9
+and H.264 and use less than half the processor than you were before with much better browsing and performance. Your Hardware acceleration 
+will not work correctly without huc and guc enabled. It is one command so yea enable it.
