@@ -1,3 +1,5 @@
+                                     ** Arch Linux KDE Plasma installation complete wifi method**
+
 Making a new installation USB
 sudo dd bs=4M if=path/to/archlinux.iso of=/dev/sdx status=progress oflag=sync
 
@@ -6,7 +8,7 @@ First method is with gdisk
 gdisk /dev/sda
 x
 z
-Tis method is with sgdisk in a single command.
+This method is with sgdisk in a single command.
 sgdisk --Z /dev/sda or 
 sgdisk --z /dev/sda
 Make sure it is erased
@@ -14,6 +16,21 @@ sgdisk -p /dev/sda
 
 Install parted if not installed
 pacman -S parted
+
+Do not use fdisk to make gpt partitons
+If you don't want to use parted which is the best method by the way especially for ssd and you want to use a graphical program instead then
+either use gparted on another Linux Live USB and make your partitons that way first before you ever boot from the Arch USB or use
+sgdisk /dev/sda or whatever your disk number is.It will be easier than parted but if you follow my instructions you will have perfectly
+aligned partitions with great performance.
+
+IF YOU CHOOSE TO DO IT WITH GPRTED FROM ANOTHER LINUX USB THEN MAKE SURE YOU HAVE AT LEAST 2 PARTITIONS.
+BOOT
+ROOT
+
+PREFERABLE 3
+BOOT
+ROOT
+HOME
 
 Erasing the partitons if you didn't do it the other way up top.
 
@@ -26,16 +43,24 @@ rm 1 ( remove partiton 1)
 rm 2
 
 rm 3
-partprobe /dev/sda
+
+quit (to write changes)
+
+( I reboot here so that I make sure my PC sees that the Partitions have been removed.)
+( Some people say you don't have to reboot and that you can just run this command (partprobe /dev/sda)
+( Here we have three partitons boot 512MiB,root 50GiB and home ( use percent and leave 10 to 15 percent or a 256 GB ssd for over
+provisioning. I leave more because I don't need it. At least leave 10 percent so it would be 90%.
+
+parted /dev/sda
 Creating a new partiton table.
 mklabel gpt
 Creating the boot partition
 mkpart primary fat32 1MiB 513MiB
 set 1 esp on
 Creating root
-mkpart primary ext4 513MiB 45.5GiB
+mkpart primary ext4 513MiB 50.5GiB
 Creating home
-mkpart primary ext4 45.5GiB 82%
+mkpart primary ext4 50.5GiB 82%
 print   (List the partitons)
 
 Check alignment
@@ -63,14 +88,14 @@ pacman -Syu
 ### Mount Partitions ###
 
 Mount /dev/sda2 /mnt
-mkdir /mnt/boot /mnt/home
+mkdir /mnt/boot
 mkdir /mnt/home
 Mount /dev/sda1 /mnt/boot
 mount /dev/sda3 /mnt/home
 
 ### get the fastest mirrors ###
 
-Install reflector with sudo pacman -S reflector
+Install reflector with sudo pacman -Syu reflector
 
 backup mirrorlist
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
@@ -113,7 +138,7 @@ ln -sf /usr/share/zoneinfo/America/Chicago  /etc/localtime
 set hardware clock to utc
 hwclock --systohc --utc
 
-### Hostname ###
+### Hostname ### ( USE YOUR HOSTNAME WHERE archpc IS MINE)
 echo archpc > /etc/hostname
 
 ### Enable multilib ###
@@ -128,7 +153,7 @@ pacman Syu
 ## Set password for root ##
 passwd
 
-### Add default user to the groups with ###
+### Add default user to the groups with ### ( ADD YOUR NAME WHERE MINE IS josh )
 
 useradd -m -g users -G wheel,storage,power -s /bin/bash josh
 
