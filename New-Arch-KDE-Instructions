@@ -428,3 +428,6 @@ Cleanup
 sudo pacman -Sc && sudo pacman -Rns $(pacman -Qtdq)
 find -xtype l -print
 find -xtype l -delete
+
+If something ever happened that you don't have network on final reboot then you can always use sudo wifi-menu to install your needed stuff.
+Kinda a safeguard I guess.
