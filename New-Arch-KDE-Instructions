@@ -242,7 +242,12 @@ enable early kms
 sudo nano /etc/mkinitcpio.conf
 
 add this to the file just like this
-MODULES=(...i915...)
+MODULES=(i915)
+
+sudo mkinitcpio -p linux
+
+sudo bootctl update
+
 
 enable huc and guc firmware loading
 sudo echo "echo \"options i915 enable_guc=2\" >> /etc/modprobe.d/i915.conf" | sudo bash
