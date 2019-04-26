@@ -212,7 +212,7 @@ sudo pacman -Syu
 
 sudo pacman -S xorg xorg-server 
 
-sudo pacman -S (xf86-video-intel--not recomended but works pretty well but I don't) intel-media-driver xf86-video-fbdev
+sudo pacman -S intel-media-driver xf86-video-fbdev
 
 sudo pacman -S sddm
 
@@ -226,17 +226,8 @@ pacman -Qi noto-fonts
 Remove the discover software center with 
 sudo pacman -Rns discover
 
-If you installed xf86-video-intel if not skip
-sudo nano /etc/X11/xorg.conf.d/20-intel.conf
-
-Section "Device"
-   Identifier  "Intel Graphics"
-   Driver      "intel"                  
-EndSection
-
-
 Enable kms on intel graphics
-sudo echo "echo \"options i915 modeset=1\" >> /etc/modprobe.d/i915.conf" | sudo bash
+sudo echo "echo \"options i915 modeset=1 enable_guc=2\" >> /etc/modprobe.d/i915.conf" | sudo bash
 
 enable early kms
 sudo nano /etc/mkinitcpio.conf
@@ -248,10 +239,6 @@ sudo mkinitcpio -p linux
 
 sudo bootctl update
 
-
-enable huc and guc firmware loading
-sudo echo "echo \"options i915 enable_guc=2\" >> /etc/modprobe.d/i915.conf" | sudo bash
-
 If you installed synaptics driver
 sudo cp -r /usr/share/X11/xorg.conf.d/70-synaptics.conf /etc/X11/xorg.conf.d/50-synaptics.conf
 
@@ -261,8 +248,6 @@ sudo systemctl set-default graphical enviroment
 reboot
 
 Or we can use the echo "exec startkde" > ~/.xinitrc
-
-I do not remember if you have to install networkmanager with plasma or enable it but just in case here is the commands and you can use the dialog method to do this if you forgot.
 
 sudo pacman -S networkmanager 
 sudo systemctl enable NetworkManager.service
@@ -279,13 +264,30 @@ You should get a 1 back
 
 performance
 sudo nano /etc/fstab
-add noatime and commit=60 to root and home
 
-tmpfs                   /tmp                                    tmpfs        noatime,nodev,nosuid      0 0
+Add noatime and commit=60 to / and /home and your tmpfs for tmp 
 
-reboot
+**Example here is my fstab**
+
+# <file system> <dir> <type> <options> <dump> <pass>
+# /dev/sda2
+UUID=22508e5b-64ac-498c-9bfb-77ed6d1e4edb       /               ext4            rw,noatime,commit=60    0 1
+
+# /dev/sda1
+UUID=9869-E399          /boot           vfat            rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro       0 2
+
+# /dev/sda3
+UUID=03152779-a44d-420d-8ce9-91a7258f1764       /home           ext4            rw,noatime,commit=60    0 2
+tmpfs                   /tmp                                    tmpfs           noatime,nodev,nosuid    0 0
+
+
+REBOOT
 
 Set hooks
+The first hook is so that you don't have to worry about running sudo bootctl update after kernel updates because it is done for you.
+The second hook takes care of your your pacnew files so that you don't have to worry about them manually.
+These are very important and the first one needs to be exactly like mine but the second one you can choose less mirrors if you want to.
+
 sudo mkdir /etc/pacman.d/hooks
 
 sudo nano /etc/pacman.d/hooks/100-systemd-boot.hook
@@ -313,8 +315,7 @@ Depends = reflector
 Exec = /usr/bin/env sh -c "reflector --latest 100 --protocol http --protocol https --sort rate  --save /etc/pacman.d/mirrorlist; if [[ -f /etc/pacman.d/mirrorlist.pacnew ]]; then rm /etc/pacman.d/mirrorlist.pacnew; fi"
 
 
-
-Build packages in the tmpfs you just created
+Build packages faster in the tmpfs you just created
 sudo nano /etc/makepkg.conf
 uncomment MAKEFLAGS= and add it like this MAKEFLAGS="-j$(nproc)"
 change build directory to tmpfs but remember to make sure you have it mounted with noexec
@@ -331,8 +332,7 @@ set .build as build directory
 
 install pacmac-tray-appindicator with pamac
 
-install the microsoft fonts that are in this folder
-sudo pacman -U ttf-ms-win10-10.0.17763.1-1-any.pkg.tar.xz
+You need to install some up to date Microsoft fonts from the AUR once you have pamac-aur installed.
 
 Install chromium-vaapi-bin
 chromium-widevine
@@ -397,7 +397,7 @@ systemmaxuse=200M
 systemmaxfilesize=50M
 
 
-Disable the blinking damn light on laptop.
+Disable the blinking light on laptop.
 sudo echo "echo \"options iwlwifi led_mode=1\" >> /etc/modprobe.d/iwlwifi.conf" | sudo bash
 
 Disable touchscreen
