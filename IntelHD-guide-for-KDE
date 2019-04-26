@@ -78,7 +78,6 @@ Under video_codec_name you should see 	h264 or vp9 and if not you need to check 
 You can follow any other thing you want but this is the best. I have used the Intel HD 620 since it came out on every Linux Desktop
 environment and this is all you need to do.
 
-Proof that hardware acceleration works and oh yea if your not running a patched version of Chromium or some other tweaked browser you do
+If your not running a patched version of Chromium or some other tweaked browser you do
 not have hardware acceleration in the browser no matter what you may think. Do some reading first if you do not believe this.
 
-![Screenshot_20190425_220544](https://user-images.githubusercontent.com/41884680/56780889-a57a5280-67a6-11e9-831d-b40f48272a19.png)
