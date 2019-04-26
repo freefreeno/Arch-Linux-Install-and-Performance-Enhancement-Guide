@@ -1,5 +1,5 @@
                                      ** Arch Linux KDE Plasma installation complete wifi method**
-                                     ** This is more than an install. This is everything you will ever need to for install and performance.
+                                     ** This is more than an install. This is everything you will ever need for install and performance.
 
 Making a new installation USB
 sudo dd bs=4M if=path/to/archlinux.iso of=/dev/sdx status=progress oflag=sync
