@@ -24,7 +24,7 @@ either use gparted on another Linux Live USB and make your partitons that way fi
 sgdisk /dev/sda or whatever your disk number is.It will be easier than parted but if you follow my instructions you will have perfectly
 aligned partitions with great performance.
 
-IF YOU CHOOSE TO DO IT WITH GPRTED FROM ANOTHER LINUX USB THEN MAKE SURE YOU HAVE AT LEAST 2 PARTITIONS.
+IF YOU CHOOSE TO DO IT WITH GPARTED FROM ANOTHER LINUX USB THEN MAKE SURE YOU HAVE AT LEAST 2 PARTITIONS.
 BOOT
 ROOT
 
