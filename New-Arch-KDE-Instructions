@@ -67,6 +67,8 @@ align-check optimal 2
 align-check optimal 3
 quit
 
+REBOOT
+
 ### Format Disk ######
 mkfs.fat -F32 /dev/sda1
 mkfs.ext4 /dev/sda2
