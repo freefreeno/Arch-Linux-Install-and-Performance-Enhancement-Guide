@@ -10,7 +10,6 @@ gdisk /dev/sda
 x
 z
 This method is with sgdisk in a single command.
-sgdisk --Z /dev/sda or 
 sgdisk --z /dev/sda
 Make sure it is erased
 sgdisk -p /dev/sda
