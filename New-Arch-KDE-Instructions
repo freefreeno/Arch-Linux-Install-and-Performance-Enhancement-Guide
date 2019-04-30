@@ -14,9 +14,6 @@ sgdisk --z /dev/sda
 Make sure it is erased
 sgdisk -p /dev/sda
 
-Install parted if not installed
-pacman -S parted
-
 Do not use fdisk to make gpt partitons
 If you don't want to use parted which is the best method by the way especially for ssd and you want to use a graphical program instead then
 either use gparted on another Linux Live USB and make your partitons that way first before you ever boot from the Arch USB or use
