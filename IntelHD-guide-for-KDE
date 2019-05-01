@@ -36,9 +36,9 @@ Now let us say you want to use the the modesetting driver which is mainly the re
 have the xf86-video-intel installed then go ahead and run sudo pacman -Rns xf86-video-intel and remove the driver and then if you have added the config file above then you also need to sudo rm -r /etc/X11/xorg.conf.d/20-intel.conf 
 Better to try this both ways to find the sweet spot because I promise no two pc's are the same.
 
+Enable kms on intel graphics and huc and guc (HEADS UP YOU MUST HAVE THE FIRMWARE INSTALLED FOR HUC AND GUC AND YOU NEED BECAUSE HARDWARE ACCELERATION) This is a must if you want to use hardware acceleration in Chrome,Chromium or any other browser for that matter.)
 
-Let us add a couple files now so run this command in Arch based distro's
-sudo echo "echo \"options i915 modeset=1\" >> /etc/modprobe.d/i915.conf" | sudo bash
+sudo echo "echo \"options i915 modeset=1 enable_guc=2\" >> /etc/modprobe.d/i915.conf" | sudo bash
 
 That is for KMS ( kernel modesetting)
 
@@ -46,16 +46,14 @@ Let us also enable early kms so run this command
 sudo nano /etc/mkinitcpio.conf
 
 add this to the file just like this
-MODULES=(...i915...)
+MODULES=(i915)
 
-refer to the Arch wiki for more info on kms and early kms
+sudo mkinitcpio -p linux
 
 Install the intel-media-driver for hardware acceleration
 sudo pacman -S intel-media-driver
 
-Load guc and huc firmware ( This is a must if you want to use hardware acceleration in Chrome,Chromium or any other browser for that matter.)
-
-sudo echo "echo \"options i915 enable_guc=2\" >> /etc/modprobe.d/i915.conf" | sudo bash
+refer to the Arch wiki for more info on kms and early kms
 
 REBOOT
 
