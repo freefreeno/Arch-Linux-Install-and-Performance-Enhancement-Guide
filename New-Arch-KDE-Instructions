@@ -422,6 +422,7 @@ Or sep partitons
 sudo fstrim -v /
 sudo fstrim -v /home
 
+sudo systemctl enable fstrim.service (TRIM)
 
 Stop KDE from showing bookmarks in the kickoff menu.
 
