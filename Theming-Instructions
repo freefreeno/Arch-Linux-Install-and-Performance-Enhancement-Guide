@@ -1,44 +1,9 @@
    *** First thing I need to say is I don't use all that fancy Kavantum crap or all those transparent windows because I like performance    and I like the Breeze window decorations. In my eyes Breeze Dark is not a bad theme but it could have better colors so most of my themes are based on breeze with my own Plasma themes and color schemes. My themes are meant to be used with Breeze window decorations. Now lets begin.
                                    *** Theming insructions for all my themes ***
---- This is for new users so we will go back to default first and do not think that my themes are this many steps because they are actually like 4 or 5 steps once you know what is going on.
---- I will do this in sections.
+Go back to default so we are on page.
+Go to look and feel and select Breeze and hit apply. 
 
-                                           *** Going back to default ***
-                                
---- Make sure your settings are set to sidebar view so you see things the way I see them.
---- If you are in icon view then select configure at the top of settings menu and select sidebar view.
-
-                                           *** Workspace Theme ***
---- Select Workspace Theme
---- Select Look and Feel
---- Select Breeze and hit apply
---- Select Plasma Theme
---- Select Breeze and hit apply ( This should already be done but if not then do it now )
-
-                                           *** Colors ***
-
---- Select Colors
---- Select Breeze and hit apply ( This should already be done but if not then do it now )
-
-                                           *** Icons ***
-                                      
---- Select Breeze and hit apply  ( This should already be done but if not then do it now )
-
-                                        *** Application Style ***
-                                 
---- Select Application Style
---- Select Widget Style and over on the right hand side you will see Widget style again.
---- Make sure widget Style is set to Breeze and hit apply
---- Select Window Decorations
---- Select Breeze and configure Breeze 
---- Select Defaults and hit apply
---- Hit apply again
---- Select GNOME/GTK Application Style
---- Select A GTK2 Theme ( Breeze )
---- Select A GTK3 Theme ( Breeze )
---- Hit apply
-
-Now we can apply my themes. The directions above have nothing to do with applying my themes. Only to get you back to default so you can follow my little guide better.
+ Now we can apply my themes. The directions above have nothing to do with applying my themes. Only to get you back to default so you can follow my little guide better.
 
 --- Go here and download the Night Terror Color-Scheme into your Downloads folder: https://www.opendesktop.org/p/1299094/
 
