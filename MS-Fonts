@@ -1,0 +1,54 @@
+Creating a MS-font package to install with sudo pacman -U 
+First off keep an up to date iso handy
+Install p7zip
+Run these two commands but you may need to change the name.
+
+7z e Win10_1903_V1_English_x64.iso sources/install.wim
+
+7z e install.wim 1/Windows/{Fonts/"*".{ttf,ttc},System32/Licenses/neutral/"*"/"*"/license.rtf} -ofonts/
+
+The fonts willl be a folder called fonts in the same folder you were in.
+
+Use the command to download ttf-ms-Win10 
+
+git clone https://aur.archlinux.org/ttf-ms-win10.git
+
+Copy All font files to the ttf-ms-win10 folder and then move to you your .build file where pacman builds packages.
+
+
+You will need to use these commands to make sure you have all files copied
+
+ cp -r *.ttf ~/Videos/ttf-ms-win10
+ cp -r *.ttc ~/Videos/ttf-ms-win10
+ cp -r *.rtf ~/Videos/ttf-ms-win10
+
+Move inside the folder and run this command 
+makepkg --skipchecksums
+
+Then your packages will be in the file where your makepkg files are stored.
+If you will remember during installation you changed the directory where make keeps files and you usually change to ~/.make-build in your home directory
+
+Find the package with any on file name and open terminal in that file and run 
+sudo pacman -U and the file name which will be something like this
+
+sudo pacman -U ttf-ms-win10-10.0.18362.116-1-any.pkg.tar.xz
+
+Make sure you keep a copy
+update font cache
+
+sudo fc-cache -f -v
+
+Run this command and make sure it looks like this and also MAKE SURE ttf-dajavu installed first.
+
+for family in serif sans-serif monospace Arial Helvetica Verdana "Times New Roman" "Courier New"; do   echo -n "$family: ";   fc-match "$family"; done
+
+
+serif: DejaVuSerif.ttf: "DejaVu Serif" "Book"
+sans-serif: DejaVuSans.ttf: "DejaVu Sans" "Book"
+monospace: DejaVuSansMono.ttf: "DejaVu Sans Mono" "Book"
+Arial: arial.ttf: "Arial" "Regular"
+Helvetica: NimbusSans-Regular.otf: "Nimbus Sans" "Regular"
+Verdana: verdana.ttf: "Verdana" "Regular"
+Times New Roman: times.ttf: "Times New Roman" "Regular"
+Courier New: cour.ttf: "Courier New" "Regular"
+
