@@ -26,10 +26,10 @@ rm 2
 
 rm 3
 
-Or you can just do this and skip all info above. That is three ways to erase you disk and start new. I use parted magic about 1 once a year on SSD to regain performance. I have a free download link.
+!Or you can just do this and skip all info above. That is three ways to erase you disk and start new. I use parted magic about 1 once a year on SSD to regain performance. I have a free download link.
 
 Creating a new partiton table.
-mklabel gpt
+parted dev/sda mklabel gpt  ( And that one command clean all data and create a new gpt)
 
 partprobe or reboot
 
