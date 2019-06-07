@@ -71,7 +71,7 @@ mkfs.ext4 /dev/sda4
 
 Connect to internet
 
-Wifi-menu 
+Wifi-menu ( only if you need wifi to install)
 
 Update the clock
 timedatectl set-ntp true
@@ -97,7 +97,7 @@ cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 You can use any number you like instead of 100. That is the number of mirrors you will have.
 You can also cahnge from http first to https first 
 
-sudo reflector --latest 100 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+sudo reflector --latest 100 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist ( YOU CAN DO LESS THAN 100 MIRRORS)
 
 #### Pacstrap Arch #####
 pacstrap - i /mnt base base-devel
@@ -132,7 +132,7 @@ ln -sf /usr/share/zoneinfo/America/Chicago  /etc/localtime
 set hardware clock to utc
 hwclock --systohc --utc
 
-### Hostname ###
+### Hostname ### ( Change the archpc to your PC name)
 echo archpc > /etc/hostname
 
 ### Enable multilib ###
@@ -159,6 +159,13 @@ passwd josh
 
 EDITOR=nano visudo
 
+Uncomment 
+# %wheel ALL=(ALL) ALL
+
+or your like me and do not want to put passwrd in when typing sudo then uncomment:
+%wheel ALL=(ALL) NOPASSWD: ALL
+
+
 Uncomment the %wheel ALL=(ALL) ALL
 
 ###Install a couple packages #### ( leave intel-ucode off if you have AMD )
@@ -172,22 +179,22 @@ I use systemd boot because it is easier,faster and it just works
 
 bootctl install
 
-### Create conf for boot loader ### ( leave initrd /intel-ucode.img if you have AMD )
+### Create conf for boot loader ### ( leave initrd /intel-ucode.img if you have AMD )( This only for sysytemd boot)
 nano /boot/loader/entries/arch.conf
 title Arch Linux
 linux /vmlinuz-linux
 initrd /intel-ucode.img
 initrd /initramfs-linux.img
 
-#### Add PARTUUID of thr ROOT partiton to our boot loader confifuration
+#### Add PARTUUID of thr ROOT partiton to our boot loader confifuration ( only for systemd boot)
 if you need to check run lsblk and find the one that has /
 Change sda2 to whatever your root is
 
-echo "options root=PARTUUID=$(blkid -s PARTUUID -o value /dev/sda2) rw quiet nmi_watchdog=0" >> /boot/loader/entries/arch.conf
+echo "options root=PARTUUID=$(blkid -s PARTUUID -o value /dev/sda2) rw quiet nmi_watchdog=0" >> /boot/loader/entries/arch.conf ( ONLY FOR SYSTEMD BOOT)
 
-nano /boot/loader/entries/arch.conf ( just to check if correctly added)
+nano /boot/loader/entries/arch.conf ( just to check if correctly added)( Only for systemd boot)
 
-pacman -S dialog wireless_tools wpa_supplicant
+pacman -S dialog wireless_tools wpa_supplicant( Only if your installing with wifi and if you foget this step then get ready to satrt over)
 
 ### Unmount #####
 
@@ -196,7 +203,7 @@ umount -R /mnt
 reboot
 
 #### Install Packages and desktop ####
-Connect to wifi-menu
+Connect to wifi-menu ( Only if your using wifi)
 sudo pacman -Syu reflector
 sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 sudo reflector --latest 100 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist
@@ -205,17 +212,18 @@ sudo pacman -Syu
 
 sudo pacman -S xorg xorg-server 
 
-sudo pacman -S (xf86-video-intel--not recomended but works pretty well but I don't) intel-media-driver xf86-video-fbdev libva-utils
+sudo pacman -S (xf86-video-intel--not recomended but works pretty well but I don't) intel-media-driver( Or libva-intel-driver) xf86-video-fbdev libva-utils 
+"YOU DO NOT HAVE TO INSTALL EITHER THE intel-media-driver OR the libva-intel-driver but if you want to watch smooth videos then yes you need the intel-media-driver for newer processors and the other for the older ones" If your not gonna watch any videos or install Chromium-vaapi-bin then you can skip entire step. If was me and i wasnt gonna install either then i would install xf86-video-intel. They say not to but I get better performance with it than using the plain ole mesa driver. If you do intall the xf86-video-intel then pay attention because there is a couple of things you need to do.
 
 sudo pacman -S sddm
 
 sudo pacman -S plasma
 
-sudo pacman -S dolphin kate konsole ark gwenview xdg-user-dirs xf86-input-synaptics spectacle git kompare kwalletmanager gtk-engine-murrine gtk-engines ksystemlog sweeper sassc python-cairo rsync
+sudo pacman -S dolphin kate konsole ark gwenview xdg-user-dirs xf86-input-synaptics spectacle git kompare kwalletmanager gtk-engine-murrine gtk-engines ksystemlog sweeper sassc python-cairo rsync( sassc and python-cairo is otpional as well as synaptics for some people)
 
 Set your enviroment variable for your intel-media-driver and disable QT logs
-sudo nano /etc/environment 
-#LIBVA_DRIVERS_PATH=/usr/lib/dri/iHD_drv_video.so (This is not working for me)
+sudo nano /etc/environment
+#LIBVA_DRIVERS_PATH=/usr/lib/dri/iHD ( Only for intel-media-driver) ( If you use the other "libva-intel-driver" then replace iHD with i965)
 LIBVA_DRIVER_NAME=iHD
 QT_LOGGING_RULES='*=false'
 
@@ -234,10 +242,10 @@ Section "Device"
 EndSection
 
 
-Enable kms on intel graphics and huc and guc
+Enable kms on intel graphics and huc and guc( make sure your graphics have guc but either way you need to do the options i915 modeset=1 
 sudo echo "echo \"options i915 modeset=1 enable_guc=2\" >> /etc/modprobe.d/i915.conf" | sudo bash
 
-enable early kms
+enable early kms( for all intel graphics)
 sudo nano /etc/mkinitcpio.conf
 
 add this to the file just like this
@@ -245,9 +253,9 @@ MODULES=(i915)
 
 sudo mkinitcpio -p linux
 
-sudo bootctl update
+sudo bootctl update( only for systemd boot)
 
-enable huc and guc firmware loading
+enable huc and guc firmware loading ( make sure you have these capabilities)
 sudo echo "echo \"options i915 enable_guc=2\" >> /etc/modprobe.d/i915.conf" | sudo bash
 
 If you installed synaptics driver
@@ -275,10 +283,10 @@ You should get a 1 back
 
 Check your iHD enviroment variable is set by running
 printenv
-You should see LIBVA_DRIVER_NAME=iHD listed the vaiables along with the QT_LOGGING_RULES info
+You should see LIBVA_DRIVER_NAME=iHD or LIBVA_DRIVER_NAME=i965 listed the vaiables along with the QT_LOGGING_RULES info
 environment vaiables are in the list.
 
-Then run this to see that hardware acceleration is set up properly
+Then run this to see that hardware acceleration is set up properly (you need libva-utils)
 vainfo
 
 You should see
@@ -297,7 +305,7 @@ tmpfs                   /tmp                                    tmpfs        noa
 
 reboot
 
-Set hooks
+Set hooks( Only for systemd boot)
 sudo mkdir /etc/pacman.d/hooks
 
 sudo nano /etc/pacman.d/hooks/100-systemd-boot.hook
@@ -312,7 +320,7 @@ When = PostTransaction
 Exec = /usr/bin/bootctl update
 
 
-sudo nano /etc/pacman.d/hooks/mirrorupgrade.hook
+sudo nano /etc/pacman.d/hooks/mirrorupgrade.hook( This is only for systemd boot)
 [Trigger]
 Operation = Upgrade
 Type = Package
@@ -341,18 +349,14 @@ makepkg -sic
 exit
 sudo rm -r pamac-aur
 
-set .build as build directory
+set .build as build directory (Preference)
 
 install pacmac-tray-appindicator with pamac
-
-install the microsoft fonts that are in this folder
-Check the name because I think there has been an update to the fonts.
-sudo pacman -U ttf-ms-win10-10.0.17763.1-1-any.pkg.tar.xz
 
 Install chromium-vaapi-bin
 chromium-widevine
 
-set flags in .config with file name
+set flags in .config with file name or do it chrome://flags
 chromium-flags.config and add these just like this
 
 --enable-accelerated-mjpeg-decode
@@ -448,7 +452,7 @@ sudo pacman -Sc && sudo pacman -Rns $(pacman -Qtdq)
 find -xtype l -print
 find -xtype l -delete
 
-Rebuild the cache using the following commands:
+Rebuild the cache using the following commands only if you have problems
 
 $ rm ~/.config/Trolltech.conf
 $ kbuildsycoca5 --noincremental
@@ -475,7 +479,63 @@ Ctrl + Alt + F5 or F6 ( This is different for other laptops I think)
 rsync -aAXv --delete --exclude="lost+found" /mnt/usb/ /mnt/system/
 As a last resort, boot with the Arch Linux Installation CD and mount the root filesystem on /
 
+Fix the order of partitons in fstab
+sudo fdisk /dev/sda
+at the prompt:
+m (for help)
+at the prompt:
+x (extra functionality - experts only)
+f (fix)
+w (write to disk and exit)
+You may get a warning that devices are in use and the new table will be used at the next boot. 
+Check fstab and menu.lst before rebooting.
+Repeat for other drives.
 
-export LIBVA_DRIVERS_PATH=/usr/lib/dri/iHD_drv_video.so
-export LIBVA_DRIVER_NAME=iHD
+Backup all KDE related config files in .config with one single command
+for j in plasma*; do mv -- "$j" "${j%}.bak"; done
+
+Blacklist memorycard reader driver.
+sudo modprobe -r rtsx_pci_sdmmc
+sudo modprobe -r rtsx_pci_ms
+sudo modprobe -r rtsx_pci
+sudo nano /etc/modprobe.d/blacklist.conf
+#Disable the useless memory card reader
+blacklist rtsx_pci
+
+Creating a MS-font package to install with sudo pacman -U 
+First off keep an up to date iso handy
+Install p7zip
+Run these two commands but you may need to change the name.
+
+7z e Win10_1903_V1_English_x64.iso sources/install.wim
+
+7z e install.wim 1/Windows/{Fonts/"*".{ttf,ttc},System32/Licenses/neutral/"*"/"*"/license.rtf} -ofonts/
+
+The fonts willl be a folder called fonts in the same folder you were in.
+
+Use the command to download ttf-ms-Win10 
+
+git clone https://aur.archlinux.org/ttf-ms-win10.git
+
+Copy All font files to the ttf-ms-win10 folder and then move to you your .build file where pacman builds packages.
+
+
+You will need to use these commands to make sure you have all files copied
+
+ cp -r *.ttf ~/Videos/ttf-ms-win10
+ cp -r *.ttc ~/Videos/ttf-ms-win10
+ cp -r *.rtf ~/Videos/ttf-ms-win10
+
+Move inside the folder and run this command 
+makepkg --skipchecksums
+
+Then your packages will be in the file where your makepkg files are stored.
+If you will remember during installation you changed the directory where make keeps files and you usually change to ~/.make-build in your home directory
+
+Find the package with any on file name and open terminal in that file and run 
+sudo pacman -U and the file name which will be something like this
+
+sudo pacman -U ttf-ms-win10-10.0.18362.116-1-any.pkg.tar.xz
+
+
 
